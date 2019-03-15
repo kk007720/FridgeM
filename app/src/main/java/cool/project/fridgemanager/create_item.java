@@ -43,7 +43,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 
 import java.util.Date;
@@ -331,10 +333,9 @@ public class create_item extends AppCompatActivity {
             create_item activity = mActivityWeakReference.get();
             if (activity != null && !activity.isFinishing()) {
                 TextView imageDetail = activity.findViewById(R.id.image_details);
-                // spliting string
+                // TODO: 切割回傳的資料
                 String[] lines = result.split(System.getProperty("line.separator"));
-                String[] newLines = new String[lines.length-2];
-                System.arraycopy(lines, 2, newLines, 0, lines.length-2);
+                String[] newLines = Arrays.copyOf(lines, 3);
 //                String[] newResult = translateStringList(newLines); // BUG
 //                String textToSet = "";
 //                for(int i = 0; i < newResult.length; i++){
@@ -342,6 +343,11 @@ public class create_item extends AppCompatActivity {
 //                }
 //                imageDetail.setText("The top three result for you: "+textToSet);
                 imageDetail.setText(result);
+
+                System.out.println("&&&&&&&&&&&"+lines[2].split(": ")[1]);
+                System.out.println("&&&&&&&&&&&"+lines[3].split(": ")[1]);
+                System.out.println("&&&&&&&&&&&"+lines[4].split(": ")[1]);
+
             }
         }
 
